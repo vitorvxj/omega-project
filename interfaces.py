@@ -3,7 +3,7 @@ from cfg import *
 pygame.mixer.init()
 
 # OST
-button_sound = pygame.mixer.Sound("C:/Users/joaov/Desktop/Projeto OMEGA/Assets/OST/clique.wav")
+button_sound = pygame.mixer.Sound("c:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/OST/button_sound.wav")
 
 
 def fade_screen(screen, color, fade_time):
@@ -144,7 +144,7 @@ class menu00:
 
         pygame.mixer.music.load(MENU_MUSIC_PATH)
         pygame.mixer.music.play(-1)
-        background_image = pygame.image.load("C:/Users/joaov/Desktop/Projeto OMEGA/Assets/BACKGROUND/background_image.png").convert()
+        background_image = pygame.image.load("c:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/BACKGROUND/background_image.png").convert()
 
         def resize_background():
             global background_image
