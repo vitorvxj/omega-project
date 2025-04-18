@@ -40,19 +40,19 @@ player_shield = initial_shield
 score = 0
 
 # Caminhos de arquivos
-font_path = r"C:\Users\joaov\OneDrive\Arquivos\Projeto OMEGA\Assets\Fonts\Neutra.ttf"
+font_path = r"C:\Users\joaov\OneDrive\Arquivos\Projeto OMEGA\Assets\interface\fonts\Neutra.ttf"
 
-BACKGROUND_MUSIC_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/OST/background_music.mp3"
-MENU_MUSIC_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/OST/menu_music.mp3"
-BUTTON_SOUND_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/OST/button_sound.wav"
+BACKGROUND_MUSIC_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/level/OST/level.mp3"
+MENU_MUSIC_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/interface/OST/menu_theme.mp3"
+BUTTON_SOUND_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/interface/OST/button.wav"
 
-SHOOT_SOUND_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/OST/shoot.wav"
-EXPLOSION_SOUND_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/OST/explosion.wav"
+SHOOT_SOUND_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/effects/shoot player/OST/shoot.wav"
+EXPLOSION_SOUND_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/effects/explosion/OST/explosion.wav"
 
-PLAYER_SPRITE_PATH_1 = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/PLAYER/Spartan00.png"
-PLAYER_SPRITE_PATH_2 = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/PLAYER/Spartan01.png"
+PLAYER_SPRITE_PATH_1 = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/player/player sprite/Spartan00.png"
+PLAYER_SPRITE_PATH_2 = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/player/player sprite/Spartan01.png"
 
-ENEMY_SPRITE_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/INIMIGOS/enemy_sprite.png"
+ENEMY_SPRITE_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/enemy/enemy sprite/enemy_sprite.png"
 
-AVATAR_IMAGE_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/AVATAR/Isis/Light Isis.png"
+AVATAR_IMAGE_PATH = "C:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/player/player avatar/Isis/Light Isis.png"
 
