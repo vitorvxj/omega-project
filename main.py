@@ -64,7 +64,9 @@ def game():
     last_enemy_spawn_time = pygame.time.get_ticks()
     enemy_spawn_delay = 1000
     
-    
+    # Configuração da fonte para exibir o FPS
+    font = pygame.font.SysFont("Arial", 18, bold=True)
+    fps_color = (255, 255, 255)  # Cor branca para o texto do FPS
     
     reset_game_state()
     running = True
@@ -110,21 +112,15 @@ def game():
         # - - - - - - - - - - -
 
         # Verificação de colisões dos disparos
-        bullets_to_remove = [] 
-        for enemy in enemies:  
-            for bullet_pair in bullets:
+        for enemy in enemies[:]:  # Use uma cópia da lista para evitar problemas de remoção
+            for bullet_pair in bullets[:]:
                 bullet_rect1, bullet_rect2 = bullet_pair
                 if enemy.rect.colliderect(bullet_rect1) or enemy.rect.colliderect(bullet_rect2):
                     explosion_channel.play(explosion_sound)
                     enemies.remove(enemy)
-                    bullets_to_remove.append(bullet_pair)
+                    bullets.remove(bullet_pair)  # Remova diretamente
                     score += 1
                     break
-
-        # Remoção de balas
-        for bullet_pair in bullets_to_remove: 
-            if bullet_pair in bullets:
-                bullets.remove(bullet_pair)
 
         # Colisão do player com os inimigos
         for enemy in enemies: 
@@ -155,7 +151,12 @@ def game():
 
         draw_hud(avatar_image)
 
-        pygame.display.flip()
+        # Exibição do FPS
+        fps = clock.get_fps()
+        fps_text = font.render(f"FPS: {int(fps)}", True, fps_color)
+        screen.blit(fps_text, (10, 10))  # Exibe o FPS no canto superior esquerdo
+
+        pygame.display.update()
 
         clock.tick(60)
 
