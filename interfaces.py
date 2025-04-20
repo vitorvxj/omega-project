@@ -6,6 +6,7 @@ pygame.mixer.init()
 button_sound = pygame.mixer.Sound("c:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/interface/OST/button.wav")
 
 
+
 def fade_screen(screen, color, fade_time):
     fade_surface = pygame.Surface((screen.get_width(), screen.get_height()))
     fade_surface.fill(color)
@@ -18,6 +19,7 @@ def fade_screen(screen, color, fade_time):
         screen.blit(fade_surface, (0, 0))
         pygame.display.update()
         pygame.time.delay(int(500 / 60))  # Delay para ajustar a taxa de quadros
+
 
 def draw_horizontal_gradient(surface, start_color, end_color):
     width = surface.get_width()
@@ -34,8 +36,8 @@ def draw_horizontal_gradient(surface, start_color, end_color):
 
 
 
-
-
+# Função para aplicar estilos de texto
+#_________________________________________________________________________________________
 def text_styles(text, font, surface, x, y, color_scheme, gradient=True, border=True, aura=True):
     text_surface = font.render(text, True, (255, 255, 255))
     text_rect = text_surface.get_rect(topleft=(x, y))
@@ -87,6 +89,9 @@ def text_styles(text, font, surface, x, y, color_scheme, gradient=True, border=T
 
     surface.blit(text_surface, text_rect.topleft)
 
+
+# Função para escalar e posicionar um retângulo proporcionalmente à resolução da tela
+#_________________________________________________________________________________________
 def scale_rect(rect, screen_width, screen_height, base_width=1920, base_height=1080):
     """Escala e posiciona um retângulo proporcionalmente à resolução da tela."""
     scale_x = screen_width / base_width
@@ -98,6 +103,9 @@ def scale_rect(rect, screen_width, screen_height, base_width=1920, base_height=1
         int(rect.height * scale_y)
     )
 
+
+# TELA GAME OVER MENU01
+#_________________________________________________________________________________________
 class menu01:
 
     def game_over(self, screen, screen_width, screen_height):
@@ -146,6 +154,9 @@ class menu01:
 
             pygame.display.flip()
 
+
+# TELA INICIAL MENU00
+#_________________________________________________________________________________________
 class menu00:
 
     def main_menu(self, screen, screen_width, screen_height):

@@ -6,7 +6,6 @@ from cfg import *
 from screen import screen, screen_width, screen_height
 from level import generate_stars, update_stars
 from player import Player, avatar
-from enemy import Enemy  # Importe a nova classe Enemy
 
 pygame.init()
 pygame.mixer.init()
@@ -16,14 +15,10 @@ pygame.mixer.init()
 main_menu = menu00()
 game_over = menu01()
 
-
-
 # Motor Grafico [Estrutura principal]
 #_________________________________________________________________________________________
 def game():
     global player_lives, score, player_rect, screen, estado
-
-
 
     clock = pygame.time.Clock()
     stars = generate_stars()
@@ -42,39 +37,18 @@ def game():
     pygame.mixer.music.load(BACKGROUND_MUSIC_PATH)
     pygame.mixer.music.play(-1)
 
-    
-
     bullets = []
-    exit_points = [
 
-        (screen_width, screen_height * 1 // 10),
-        (screen_width, screen_height * 2 // 10),
-        (screen_width, screen_height * 3 // 10),
-        (screen_width, screen_height * 4 // 10),
-        (screen_width, screen_height * 5 // 10),
-        (screen_width, screen_height * 6 // 10),
-        (screen_width, screen_height * 7 // 10),
-        (screen_width, screen_height * 8 // 10),
-        (screen_width, screen_height * 9 // 10),
-
-    ]
-    occupied_exits = set()
-    exit_spawn_times = {i: 0 for i in range(len(exit_points))}
-    enemies = []
-    last_enemy_spawn_time = pygame.time.get_ticks()
-    enemy_spawn_delay = 1000
-    
     # Configuração da fonte para exibir o FPS
     font = pygame.font.SysFont("Arial", 18, bold=True)
     fps_color = (255, 255, 255)  # Cor branca para o texto do FPS
-    
+
     reset_game_state()
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        
 
         # [Mecanica PRINCIPAL]
         # - - - - - - - - - - -
@@ -94,45 +68,11 @@ def game():
         # Atualização dos tiros
         player.move_bullets(bullets, screen_width)
 
-        # Atualização dos inimigos
-        enemies = Enemy.move_enemies(enemies)
-
         # Atualização dos sprites
         all_sprites.update()
 
-        # Criação de inimigos
-        if current_time - last_enemy_spawn_time > enemy_spawn_delay and len(enemies) < 9:
-            new_enemy = Enemy.create_new_enemy(exit_points, occupied_exits, exit_spawn_times, current_time)
-            if new_enemy:
-                enemies.append(new_enemy)
-                last_enemy_spawn_time = current_time
-
-
         # [Colisões]
         # - - - - - - - - - - -
-
-        # Verificação de colisões dos disparos
-        for enemy in enemies[:]:  # Use uma cópia da lista para evitar problemas de remoção
-            for bullet_pair in bullets[:]:
-                bullet_rect1, bullet_rect2 = bullet_pair
-                if enemy.rect.colliderect(bullet_rect1) or enemy.rect.colliderect(bullet_rect2):
-                    explosion_channel.play(explosion_sound)
-                    enemies.remove(enemy)
-                    bullets.remove(bullet_pair)  # Remova diretamente
-                    score += 1
-                    break
-
-        # Colisão do player com os inimigos
-        for enemy in enemies: 
-            if player.rect.colliderect(enemy.rect):
-                player_lives -= 1
-                explosion_channel.play(explosion_sound)
-                enemies.remove(enemy)
-                if player_lives == 0:
-                    running = False
-                    pygame.mixer.music.stop()
-                    estado = "menu01"
-
 
         # [Gerador de GRAFICO]
         # - - - - - - - - - - - -
@@ -142,8 +82,6 @@ def game():
         update_stars(stars)
         
         all_sprites.draw(screen)  # Desenha todos os sprites
-        for enemy in enemies:
-            enemy.draw(screen)
         for bullet_pair in bullets:
             bullet_rect1, bullet_rect2 = bullet_pair
             pygame.draw.rect(screen, RED, bullet_rect1)
@@ -160,14 +98,10 @@ def game():
 
         clock.tick(60)
 
-
-
-
 # Hud in game [Desenha o HUD durante a gameplay]
 #_________________________________________________________________________________________
 def draw_hud(avatar_image):
     global screen, player_lives, player_shield, score
-    
 
     # Desenha a Moldura do Avatar
     # - - - - - - - - - - - - - - 
@@ -183,7 +117,6 @@ def draw_hud(avatar_image):
     avatar_rect = avatar_image.get_rect(center=square_rect.center)
     screen.blit(avatar_image, avatar_rect.topleft)
 
-
     # Desenha a barra de vida
     # - - - - - - - - - - - - - - 
     life_bar_width = 400  # [Comprimento]
@@ -197,7 +130,6 @@ def draw_hud(avatar_image):
     current_life_width = (player_lives / initial_lives) * (life_bar_width - 2 * border_thickness)
     current_life_rect = pygame.Rect(life_bar_rect.left + border_thickness, life_bar_rect.top + border_thickness, current_life_width, life_bar_height - 2 * border_thickness)
     pygame.draw.rect(screen, life_bar_color, current_life_rect)
-
 
     # Desenha a barra de escudo
     # - - - - - - - - - - - - - - 
@@ -216,14 +148,11 @@ def draw_hud(avatar_image):
     current_shield_rect = pygame.Rect(shield_bar_rect.left + border_thickness, shield_bar_rect.top + border_thickness, current_shield_width, shield_bar_height - 2 * border_thickness)
     pygame.draw.rect(screen, shield_bar_color, current_shield_rect)
 
-
-
 def reset_game_state():
     global player_lives, player_shield, score
     player_lives = initial_lives  
     player_shield = initial_shield
     score = 0
-
 
 # Loop principal [Gerenciador de estados do GAME]
 #_________________________________________________________________________________________
