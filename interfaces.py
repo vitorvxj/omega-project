@@ -1,10 +1,10 @@
 import pygame
 from cfg import *
+from screen import scale_rect, mudar_resolucao
 pygame.mixer.init()
 
 # OST
 button_sound = pygame.mixer.Sound("c:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/interface/OST/button.wav")
-
 
 
 def fade_screen(screen, color, fade_time):
@@ -33,7 +33,6 @@ def draw_horizontal_gradient(surface, start_color, end_color):
         ]
         color.append(int(255 * (1 - ratio)))  # Adiciona a transparência
         pygame.draw.line(surface, color, (x, 0), (x, height))
-
 
 
 # Função para aplicar estilos de texto
@@ -90,19 +89,6 @@ def text_styles(text, font, surface, x, y, color_scheme, gradient=True, border=T
     surface.blit(text_surface, text_rect.topleft)
 
 
-# Função para escalar e posicionar um retângulo proporcionalmente à resolução da tela
-#_________________________________________________________________________________________
-def scale_rect(rect, screen_width, screen_height, base_width=1920, base_height=1080):
-    scale_x = screen_width / base_width
-    scale_y = screen_height / base_height
-    return pygame.Rect(
-        int(rect.x * scale_x),
-        int(rect.y * scale_y),
-        int(rect.width * scale_x),
-        int(rect.height * scale_y)
-    )
-
-
 # TELA GAME OVER MENU01
 #_________________________________________________________________________________________
 class menu01:
@@ -113,7 +99,6 @@ class menu01:
         pygame.mixer.music.load(MENU_MUSIC_PATH)
         pygame.mixer.music.play(-1)
 
-        base_width, base_height = 1920, 1080  # Resolução base para escalonamento
         over_running = True
         while over_running:
 
@@ -133,20 +118,16 @@ class menu01:
                         return "menu00"
 
             screen.fill(BLACK)
-            font = pygame.font.Font(font_path, int(80 * (screen_width / base_width)))
+            font = pygame.font.Font(font_path, int(80 * (screen_width / 1920)))
             text_styles(
                 "GAME OVER!!!", font, screen,
                 int(screen_width // 20), int(screen_height // 2 - 60),
                 color_scheme='red', gradient=True, border=True, aura=True
             )
 
-            font = pygame.font.Font(font_path, int(30 * (screen_width / base_width)))
-            start_button = scale_rect(
-                pygame.Rect(100, 920, 200, 44), screen_width, screen_height, base_width, base_height
-            )
-            return_button = scale_rect(
-                pygame.Rect(100, 980, 200, 44), screen_width, screen_height, base_width, base_height
-            )
+            font = pygame.font.Font(font_path, int(30 * (screen_width / 1920)))
+            start_button = scale_rect(pygame.Rect(100, 920, 200, 44))
+            return_button = scale_rect(pygame.Rect(100, 980, 200, 44))
 
             text_styles("Decolar", font, screen, start_button.x, start_button.y, color_scheme='red', gradient=True, border=True, aura=True)
             text_styles("Voltar", font, screen, return_button.x, return_button.y, color_scheme='red', gradient=True, border=True, aura=True)
@@ -164,8 +145,6 @@ class menu00:
         pygame.mixer.music.load(MENU_MUSIC_PATH)
         pygame.mixer.music.play(-1)
         background_image = pygame.image.load("c:/Users/joaov/OneDrive/Arquivos/Projeto OMEGA/Assets/interface/background/menu_home.png").convert()
-
-        base_width, base_height = 1920, 1080  # Resolução base para escalonamento
 
         def resize_background():
             global background_image
@@ -210,20 +189,16 @@ class menu00:
             draw_horizontal_gradient(gradient_surface, (0, 0, 0), (0, 0, 0, 0))
             screen.blit(gradient_surface, (0, 0))
 
-            font = pygame.font.Font(font_path, int(80 * (screen_width / base_width)))
+            font = pygame.font.Font(font_path, int(80 * (screen_width / 1920)))
             text_styles(
                 "SPEED NAVY ULTRA", font, screen,
                 int(screen_width // 20), int(screen_height // 2 - 60),
                 color_scheme='blue', gradient=True, border=True, aura=True
             )
 
-            font = pygame.font.Font(font_path, int(30 * (screen_width / base_width)))
-            start_button = scale_rect(
-                pygame.Rect(100, 920, 200, 44), screen_width, screen_height, base_width, base_height
-            )
-            quit_button = scale_rect(
-                pygame.Rect(100, 980, 200, 44), screen_width, screen_height, base_width, base_height
-            )
+            font = pygame.font.Font(font_path, int(30 * (screen_width / 1920)))
+            start_button = scale_rect(pygame.Rect(100, 920, 200, 44))
+            quit_button = scale_rect(pygame.Rect(100, 980, 200, 44))
 
             text_styles("Decolar", font, screen, start_button.x, start_button.y, color_scheme='blue', gradient=True, border=True, aura=True)
             text_styles("Sair", font, screen, quit_button.x, quit_button.y, color_scheme='blue', gradient=True, border=True, aura=True)

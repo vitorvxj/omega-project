@@ -8,6 +8,7 @@ from cfg import *
 
 
 def generate_stars():
+
     stars = []
     for _ in range(NUM_STARS):
         x = random.randint(0, screen_width)
@@ -18,6 +19,7 @@ def generate_stars():
     return stars
 
 def update_stars(stars):
+    
     for i, (x, y, color, level) in enumerate(stars):
         x -= STAR_SPEED[level - 1]
         if x < 0:
