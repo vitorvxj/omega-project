@@ -93,7 +93,6 @@ def text_styles(text, font, surface, x, y, color_scheme, gradient=True, border=T
 # Função para escalar e posicionar um retângulo proporcionalmente à resolução da tela
 #_________________________________________________________________________________________
 def scale_rect(rect, screen_width, screen_height, base_width=1920, base_height=1080):
-    """Escala e posiciona um retângulo proporcionalmente à resolução da tela."""
     scale_x = screen_width / base_width
     scale_y = screen_height / base_height
     return pygame.Rect(

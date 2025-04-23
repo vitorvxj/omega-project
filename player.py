@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.images[self.current_image]
         self.rect = self.image.get_rect(center=pos)
         self.last_update = pygame.time.get_ticks()
-        self.animation_delay = 500  # milissegundos, aumente este valor para uma transição mais sutil
+        self.animation_delay = 2000  # milissegundos, aumente este valor para uma transição mais sutil
         self.last_shot_time = pygame.time.get_ticks()  # Adiciona last_shot_time como atributo da classe
     
     # Método para atualizar a animação
