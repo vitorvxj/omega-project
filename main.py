@@ -3,7 +3,7 @@ import random
 
 from interfaces import menu00, menu01
 from cfg import *
-from screen import screen, screen_width, screen_height
+from screen import screen, screen_width, screen_height, tick_rate
 from level import generate_stars, update_stars
 from player import Player, avatar
 
@@ -52,23 +52,11 @@ def game():
 
         # [Mecanica PRINCIPAL]
         # - - - - - - - - - - -
-        
-        # Atualização de variáveis
         keys = pygame.key.get_pressed()
-
-        # Atualização do tempo
         current_time = pygame.time.get_ticks()
-
-        # Atualização da posição do player
         player.handle_movement(keys, screen_height, screen_width)
-
-        # Atualização da animação do player
         player.handle_shooting(current_time, bullets, shoot_channel, shoot_sound)
-
-        # Atualização dos tiros
         player.move_bullets(bullets, screen_width)
-
-        # Atualização dos sprites
         all_sprites.update()
 
         # [Colisões]
@@ -78,7 +66,6 @@ def game():
         # - - - - - - - - - - - -
 
         screen.fill(BLACK)
-
         update_stars(stars)
         
         all_sprites.draw(screen)  # Desenha todos os sprites
@@ -95,8 +82,7 @@ def game():
         screen.blit(fps_text, (10, 10))  # Exibe o FPS no canto superior esquerdo
 
         pygame.display.update()
-
-        clock.tick(60)
+        tick_rate(clock)
 
 # Hud in game [Desenha o HUD durante a gameplay]
 #_________________________________________________________________________________________

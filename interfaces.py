@@ -1,6 +1,6 @@
 import pygame
 from cfg import *
-from screen import scale_rect, mudar_resolucao
+from screen import scale_rect, scale, tick_rate
 pygame.mixer.init()
 
 # OST
@@ -100,6 +100,8 @@ class menu01:
         pygame.mixer.music.play(-1)
 
         over_running = True
+        clock = pygame.time.Clock()
+
         while over_running:
 
             for event in pygame.event.get():
@@ -134,6 +136,9 @@ class menu01:
 
             pygame.display.flip()
 
+            # Limitar a velocidade de execução
+            tick_rate(clock)
+
 
 # TELA INICIAL MENU00
 #_________________________________________________________________________________________
@@ -148,14 +153,10 @@ class menu00:
 
         def resize_background():
             global background_image
-            bg_aspect_ratio = background_image.get_width() / background_image.get_height()
-            screen_aspect_ratio = screen_width / screen_height
-            if bg_aspect_ratio > screen_aspect_ratio:
-                new_height = screen_height
-                new_width = int(new_height * bg_aspect_ratio)
-            else:
-                new_width = screen_width
-                new_height = int(new_width / bg_aspect_ratio)
+            base_width, base_height = background_image.get_width(), background_image.get_height()
+            scale_x, scale_y = scale(base_width, base_height, screen_width, screen_height)
+            new_width = int(base_width * scale_x)
+            new_height = int(base_height * scale_y)
             background_image = pygame.transform.scale(background_image, (new_width, new_height))
 
         def draw_background():
@@ -166,6 +167,8 @@ class menu00:
         resize_background()
 
         menu_running = True
+        clock = pygame.time.Clock()
+
         while menu_running:
 
             for event in pygame.event.get():
@@ -204,3 +207,6 @@ class menu00:
             text_styles("Sair", font, screen, quit_button.x, quit_button.y, color_scheme='blue', gradient=True, border=True, aura=True)
 
             pygame.display.flip()
+
+            # Limitar a velocidade de execução
+            tick_rate(clock)

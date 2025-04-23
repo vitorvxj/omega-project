@@ -2,9 +2,15 @@ import pygame
 import random
 
 from screen import screen, screen_width, screen_height
-from cfg import *
 
+# Configurações das estrelas
+NUM_STARS = 100
+STAR_COLORS = [(135, 206, 235), (176, 224, 230), (173, 216, 230), (135, 206, 250)]
+STAR_LEVELS = 5
+STAR_SPEED = [1, 2, 4, 8, 16]
 
+STAR_DARK_BLUE = (0, 0, 139) # [Backgroud Stars]
+STAR_LIGHT_BLUE = (173, 216, 230) # [Backgroud Stars]
 
 
 def generate_stars():
@@ -19,7 +25,7 @@ def generate_stars():
     return stars
 
 def update_stars(stars):
-    
+
     for i, (x, y, color, level) in enumerate(stars):
         x -= STAR_SPEED[level - 1]
         if x < 0:

@@ -1,3 +1,5 @@
+# Configurações do jogo
+
 # Cores
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -19,15 +21,6 @@ BULLET_SPEED = 40
 ENEMY_WIDTH = 150
 ENEMY_HEIGHT = 120
 ENEMY_SPEED = -5
-
-# Configurações das estrelas
-NUM_STARS = 100
-STAR_COLORS = [(135, 206, 235), (176, 224, 230), (173, 216, 230), (135, 206, 250)]
-STAR_LEVELS = 5
-STAR_SPEED = [1, 2, 4, 8, 16]
-
-STAR_DARK_BLUE = (0, 0, 139) # [Backgroud Stars]
-STAR_LIGHT_BLUE = (173, 216, 230) # [Backgroud Stars]
 
 # Estado do jogo
 estado = "menu00"
